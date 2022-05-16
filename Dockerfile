@@ -7,6 +7,6 @@ RUN apt update && apt-get -y install vim openssh-server git curl wget &&\
   wget "https://github.com/envoyproxy/envoy/archive/${SHA1}.tar.gz" &&\
   tar -zxvf "envoy-${SHA1}.tar.gz" &&\
   cd "envoy-${SHA1}" &&\
-  sh /root/envoy/tools/vscode/refresh_compdb.sh
+  python3 tools/vscode/generate_debug_config.py //test/extensions/filters/network/dubbo_proxy:dubbo_hessian2_serializer_impl_test --debugger "lldb"
 RUN sed -i 's|#PermitRootLogin.*|PermitRootLogin yes|g' /etc/ssh/sshd_config
   
