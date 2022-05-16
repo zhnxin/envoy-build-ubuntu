@@ -4,6 +4,6 @@ ENV PATH="/opt/llvm/bin:$PATH"
 RUN cd /root &&\
   git clone --depth 1 -b v1.20.1 https://github.com/envoyproxy/envoy.git &&\
   cd "envoy" &&\
-  python3 tools/vscode/generate_debug_config.py //test/extensions/filters/network/dubbo_proxy:dubbo_hessian2_serializer_impl_test --debugger "lldb"
+  timeout 1800s python3 tools/vscode/generate_debug_config.py //test/extensions/filters/network/dubbo_proxy:dubbo_hessian2_serializer_impl_test --debugger "lldb" || true
 RUN sed -i 's|#PermitRootLogin.*|PermitRootLogin yes|g' /etc/ssh/sshd_config
   
